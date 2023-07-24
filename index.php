@@ -9,7 +9,7 @@
 
 <body>
 
-    <!-- Functions and Filters -->
+    <!-- Lambda Functions -->
     <h1>
         Recommended books
     </h1>
@@ -38,22 +38,16 @@
         ]
     ];
 
-    function filterByAuthor($books, $author)
-    {
-        $filteredBooks = [];
-
-        foreach ($books as $book) {
-            if ($book['author'] === $author) {
-                $filteredBooks[] = $book;
-            }
+    $filteredBooks = array_filter(
+        $books,
+        function ($book) {
+            return $book['author'] === 'Andy Weir';
         }
-
-        return $filteredBooks;
-    }
+    );
     ?>
 
     <ul>
-        <?php foreach (filterByAuthor($books, 'Philip K. Dick') as $book) : ?>
+        <?php foreach ($filteredBooks as $book) : ?>
             <li>
                 <a href="<?= $book['purchaseUrl']; ?>">
                     <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
