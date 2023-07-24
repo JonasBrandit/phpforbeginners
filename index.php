@@ -5,21 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
-    <!-- <style>
-        body {
-            display: grid;
-            place-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: sans-serif;
-        }
-    </style> -->
 </head>
 
 <body>
 
-    <!-- Associative Arrays -->
-
+    <!-- Functions and Filters -->
     <h1>
         Recommended books
     </h1>
@@ -38,20 +28,40 @@
             'author' => 'Andy Weir',
             'releaseYear' => '2012',
             'purchaseUrl' => 'http://example.com'
+        ],
+
+        [
+            'name' => 'The Martian',
+            'author' => 'Andy Weir',
+            'releaseYear' => '2019',
+            'purchaseUrl' => 'http://example.com'
         ]
     ];
+
+    function filterByAuthor($books, $author)
+    {
+        $filteredBooks = [];
+
+        foreach ($books as $book) {
+            if ($book['author'] === $author) {
+                $filteredBooks[] = $book;
+            }
+        }
+
+        return $filteredBooks;
+    }
     ?>
 
     <ul>
-        <?php foreach ($books as $book) : ?>
+        <?php foreach (filterByAuthor($books, 'Philip K. Dick') as $book) : ?>
             <li>
                 <a href="<?= $book['purchaseUrl']; ?>">
-                    <?= $book['name'] ?> (<?= $book['releaseYear'] ?>)
+                    <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
                 </a>
             </li>
-
         <?php endforeach; ?>
     </ul>
+
 </body>
 
 </html>
